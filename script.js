@@ -1,45 +1,20 @@
 (() => {
-    async function getStatus() {
-        const stat = document.getElementById('status');
-        try {
-            const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test', {
-            headers: {
-                'Accept': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
-            }
-            });
-            
-            // Periksa apakah response tipe kontennya JSON
-            const contentType = response.headers.get("content-type");
-            if (response.ok) {
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
-        const data = await response.json();
-        console.log(data); // Menampilkan data yang diterima
-        if (data && data.message) {
-            stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
-        } else {
-            stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Data tidak valid</p>`;
-        }
-    } else {
-        console.error('Tipe konten tidak valid, yang diterima adalah: ' + contentType);
-        stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
+  async function getStatus() {
+    const stat = document.getElementById('status');
+    try {
+      const res = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test', {
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      });
+      const data = await res.json();
+      stat.innerHTML = `Status BOT: <p class="text-white ${res.ok ? 'bg-green-500' : 'bg-red-500'} p-2 rounded">${data.message || 'Tidak valid'}</p>`;
+    } catch (err) {
+      console.error(err);
+      stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
     }
-} else {
-    console.error('Response tidak OK', response.status);
-    stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
-}
+  }
 
-        } catch (error) {
-            console.error("Terjadi error saat fetch:", error);
-            stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
-        }
-    }
-
-    getStatus();
+  getStatus();
 })();
-
-
 
 
 function getAkses() {
