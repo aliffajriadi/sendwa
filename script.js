@@ -6,10 +6,10 @@
         headers: { 'ngrok-skip-browser-warning': 'true' }
       });
       const data = await res.json();
-      stat.innerHTML = `Status BOT: <p class="text-white ${res.ok ? 'bg-green-500' : 'bg-red-500'} p-2 rounded">${data.message || 'Tidak valid'}</p>`;
+      stat.innerHTML = `<p>Status BOT:</p> <p class="text-white ${res.ok ? 'bg-green-500' : 'bg-red-500'} p-2 rounded">${data.message || 'Tidak valid'}</p>`;
     } catch (err) {
       console.error(err);
-      stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
+      stat.innerHTML = `<p>Status BOT:</p><p class="text-white bg-red-500 p-2 rounded">Offline</p>`;
     }
   }
 
