@@ -4,11 +4,19 @@
         try {
             const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test');
             if (response.ok) {
-                const data = await response.json(); // Mendapatkan data dari response API
-                stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
+                const data = await response.json();
+                console.log(data); // Cek data yang diterima
+                if (data && data.message) {
+                    stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
+                } else {
+                    stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Data tidak valid</p>`;
+                }
+            } else {
+                console.error('Response tidak OK', response.status);
+                stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
             }
         } catch (error) {
-            console.error("Terjadi error saat fetch:", error); // Tambahkan log
+            console.error("Terjadi error saat fetch:", error);
             stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
         }
     }
