@@ -6,6 +6,7 @@
             const data = await response.json();
             stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">${data.message}</p>`;
         } catch (error) {
+            console.error("Terjadi error saat fetch:", error); // tambahkan log
             stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Offline</p>`;
         }
     }
