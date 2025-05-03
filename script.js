@@ -3,13 +3,21 @@
         const stat = document.getElementById('status');
         try {
             const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test');
+            
+            // Periksa apakah response tipe kontennya JSON
+            const contentType = response.headers.get("content-type");
             if (response.ok) {
-                const data = await response.json();
-                console.log(data); // Cek data yang diterima
-                if (data && data.message) {
-                    stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await response.json();
+                    console.log(data); // Cek data yang diterima
+                    if (data && data.message) {
+                        stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
+                    } else {
+                        stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Data tidak valid</p>`;
+                    }
                 } else {
-                    stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Data tidak valid</p>`;
+                    console.error('Tipe konten tidak valid, yang diterima adalah: ' + contentType);
+                    stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
                 }
             } else {
                 console.error('Response tidak OK', response.status);
@@ -23,6 +31,7 @@
 
     getStatus();
 })();
+
 
 
 
