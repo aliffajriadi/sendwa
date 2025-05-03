@@ -4,16 +4,18 @@
         try {
             const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test');
             if (response.ok) {
+                const data = await response.json(); // Mendapatkan data dari response API
                 stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">BOT ${data.message}</p>`;
-            };
+            }
         } catch (error) {
-            console.error("Terjadi error saat fetch:", error); // tambahkan log
+            console.error("Terjadi error saat fetch:", error); // Tambahkan log
             stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">BOT Offline</p>`;
         }
     }
 
     getStatus();
 })();
+
 
 
 function getAkses() {
