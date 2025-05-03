@@ -2,7 +2,12 @@
     async function getStatus() {
         const stat = document.getElementById('status');
         try {
-            const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test');
+            const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test', {
+            headers: {
+                'Accept': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
+            }
+            });
             
             // Periksa apakah response tipe kontennya JSON
             const contentType = response.headers.get("content-type");
