@@ -1,18 +1,18 @@
-    const stat = document.getElementById('status') 
+(() => {
     async function getStatus() {
-        const stat = document.getElementById('status'); 
+        const stat = document.getElementById('status');
         try {
             const response = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test');
             const data = await response.json();
-            stat.innerHTML = `Status BOT <p class="bg-green-700 p-2 rounded-2xl text-white">${data.message}</p>`;
+            stat.innerHTML = `<p class="text-white bg-green-500 p-2 rounded">${data.message}</p>`;
         } catch (error) {
-            stat.innerHTML = `Status BOT <p class="bg-red-700 p-2 rounded-2xl text-white">Offline</p>`;
+            stat.innerHTML = `<p class="text-white bg-red-500 p-2 rounded">Offline</p>`;
         }
     }
 
-    window.onload = function() {
-        getStatus();
-    };
+    getStatus();
+})();
+
 
 function getAkses() {
     const token = document.getElementById('akses').value;
