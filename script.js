@@ -1,8 +1,10 @@
+const url_api = "https://f595-43-209-20-233.ngrok-free.app";
+
 (() => {
   async function getStatus() {
     const stat = document.getElementById('status');
     try {
-      const res = await fetch('https://3f18-43-209-20-233.ngrok-free.app/api/test', {
+      const res = await fetch(`${url_api}/api/test`, {
         headers: { 'ngrok-skip-browser-warning': 'true' }
       });
       const data = await res.json();
