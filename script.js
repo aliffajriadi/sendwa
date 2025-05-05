@@ -18,7 +18,6 @@ const url_api = "https://f595-43-209-20-233.ngrok-free.app";
   getStatus();
 })();
 
-
 function getAkses() {
     const token = document.getElementById('akses').value;
     const modal = document.getElementsByClassName('akses')[0]; // ambil elemen pertama
@@ -43,40 +42,40 @@ function showNotification(messageObj) {
       notif.classList.add("fade-out");
       setTimeout(() => notif.classList.add("hidden"), 500);
     }, 4000);
+}
+
+document.getElementById("formKirim").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const nomor = document.getElementById("nomor").value;
+  const pesan = document.getElementById("pesan").value;
+
+  try {
+    const response = await fetch(`${url_api}/api/kirim`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nomor, pesan })
+    });
+    const result = await response.json();
+    showNotification(result);
+  } catch (err) {
+    showNotification({ error: "Gagal mengirim pesan." });
   }
+});
 
-  document.getElementById("formKirim").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const nomor = document.getElementById("nomor").value;
-    const pesan = document.getElementById("pesan").value;
+document.getElementById("formBroadcast").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const tujuan = document.getElementById("tujuan").value;
+  const pesan = document.getElementById("pesanBroadcast").value;
 
-    try {
-      const response = await fetch("https://3f18-43-209-20-233.ngrok-free.app/api/kirim", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nomor, pesan })
-      });
-      const result = await response.json();
-      showNotification(result);
-    } catch (err) {
-      showNotification({ error: "Gagal mengirim pesan." });
-    }
-  });
-
-  document.getElementById("formBroadcast").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const tujuan = document.getElementById("tujuan").value;
-    const pesan = document.getElementById("pesanBroadcast").value;
-
-    try {
-      const response = await fetch("https://3f18-43-209-20-233.ngrok-free.app/api/broadcast", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tujuan, pesan })
-      });
-      const result = await response.json();
-      showNotification(result);
-    } catch (err) {
-      showNotification({ error: "Gagal melakukan broadcast." });
-    }
-  });
+  try {
+    const response = await fetch(`${url_api}/api/broadcast`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tujuan, pesan })
+    });
+    const result = await response.json();
+    showNotification(result);
+  } catch (err) {
+    showNotification({ error: "Gagal melakukan broadcast." });
+  }
+});
