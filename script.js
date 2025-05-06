@@ -1,4 +1,4 @@
-const url_api = "https://8da6b97b0da6b2c4373f331d8a4be5a1.serveo.net;
+const url_api = "https://8da6b97b0da6b2c4373f331d8a4be5a1.serveo.net";
 
 (() => {
   async function getStatus() {
