@@ -1,4 +1,4 @@
-const url_api = "https://f595-43-209-20-233.ngrok-free.app";
+const url_api = "https://8da6b97b0da6b2c4373f331d8a4be5a1.serveo.net;
 
 (() => {
   async function getStatus() {
